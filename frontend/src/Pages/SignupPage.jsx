@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const SignupPage = () => {
   return (
     <div className="flex flex-row items-center justify-around p-10 py-15 w-full h-dvh font-poppins">
-      <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-sm w-1/2 h-full">
+      <div className="bg-white p-8 rounded-lg shadow-lg max-w-sm w-1/2 h-full">
         <h2 className="text-3xl font-bold text-center mb-8 text-[#0C0950]">
           Admin Signup
         </h2>

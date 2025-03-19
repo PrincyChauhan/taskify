@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import Sidebar from "../components/sidebar";
-import { Table, Tag } from "antd";
+import Sidebar from "../components/Sidebar";
+import { Table, Tag, Spin } from "antd";
 
 const Dashboard = () => {
   const [users, setUsers] = useState([]);
@@ -94,7 +94,9 @@ const Dashboard = () => {
       <div className="flex flex-row">
         <Sidebar />
         {loading ? (
-          <p>Loading...</p>
+          <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center bg-white bg-opacity-80">
+            <Spin size="large" />
+          </div>
         ) : (
           <Table
             columns={columns}

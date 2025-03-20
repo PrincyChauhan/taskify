@@ -1,18 +1,29 @@
 import React, { useEffect, useState } from "react";
 import Sidebar from "../components/Sidebar";
 import Navbar from "../components/Navbar";
-import { Table, Spin } from "antd";
+import { Table, Spin, Modal, Button, Space, Tag } from "antd";
 import axios from "axios";
 import { FaPencil } from "react-icons/fa6";
 import { MdDeleteOutline, MdRemoveRedEye } from "react-icons/md";
-import { Tag, Space } from "antd";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { ExclamationCircleOutlined } from "@ant-design/icons";
 
 const TaskList = () => {
   const [tasks, setTasks] = useState([]);
   const [loading, setLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
+  const [open, setOpen] = useState(false);
+  const [currentTaskId, setCurrentTaskId] = useState(null);
+
+  const showModal = (taskId) => {
+    setCurrentTaskId(taskId);
+    setOpen(true);
+  };
+  const hideModal = () => {
+    setOpen(false);
+    setCurrentTaskId(null);
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -84,6 +95,28 @@ const TaskList = () => {
     }
   };
 
+  const handleDeleteClick = async (taskId) => {
+    try {
+      const token = localStorage.getItem("token");
+      const response = await axios.delete(
+        `http://localhost:3000/task/delete-task/${taskId}`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+      if (response.data.success) {
+        toast.success("Task deleted successfully");
+        setTasks((prevTasks) => prevTasks.filter((task) => task.id !== taskId));
+        hideModal();
+      } else {
+        toast.error("Failed to delete task");
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error("An error occurred while deleting task.");
+    }
+  };
+
   const columns = [
     {
       title: "Task title",
@@ -143,7 +176,7 @@ const TaskList = () => {
     {
       title: "Action",
       key: "action",
-      render: () => (
+      render: (record) => (
         <div className="flex space-x-4">
           <button>
             <MdRemoveRedEye />
@@ -151,7 +184,7 @@ const TaskList = () => {
           <button>
             <FaPencil />
           </button>
-          <button>
+          <button onClick={() => showModal(record.id)}>
             <MdDeleteOutline></MdDeleteOutline>
           </button>
         </div>
@@ -179,6 +212,17 @@ const TaskList = () => {
           />
         )}
       </div>
+      <Modal
+        title="Confirm Deletion"
+        open={open}
+        onOk={() => handleDeleteClick(currentTaskId)}
+        onCancel={hideModal}
+        okText="Yes, Delete"
+        cancelText="Cancel"
+        icon={<ExclamationCircleOutlined />}
+      >
+        <p>Are you sure you want to delete this task?</p>
+      </Modal>
     </div>
   );
 };

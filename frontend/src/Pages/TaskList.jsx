@@ -7,9 +7,11 @@ import { FaPencil } from "react-icons/fa6";
 import { MdDeleteOutline, MdRemoveRedEye } from "react-icons/md";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useNavigate } from "react-router-dom";
 import { ExclamationCircleOutlined } from "@ant-design/icons";
 
 const TaskList = () => {
+  const navigate = useNavigate();
   const [tasks, setTasks] = useState([]);
   const [loading, setLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
@@ -117,6 +119,9 @@ const TaskList = () => {
     }
   };
 
+  const handleViewTask = (taskId) => {
+    navigate(`/view-task/${taskId}`);
+  };
   const columns = [
     {
       title: "Task title",
@@ -178,7 +183,7 @@ const TaskList = () => {
       key: "action",
       render: (record) => (
         <div className="flex space-x-4">
-          <button>
+          <button onClick={() => handleViewTask(record.id)}>
             <MdRemoveRedEye />
           </button>
           <button>

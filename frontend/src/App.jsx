@@ -5,6 +5,7 @@ import Dashboard from "./Pages/Dashboard";
 import CreateUser from "./Pages/CreateUser";
 import CreateTask from "./Pages/CreateTask";
 import TaskList from "./Pages/TaskList";
+import ViewTask from "./Pages/ViewTask";
 const App = () => {
   return (
     <Router>
@@ -15,6 +16,7 @@ const App = () => {
         <Route path="/create-user" element={<CreateUser />} />
         <Route path="/create-task" element={<CreateTask />} />
         <Route path="/tasks" element={<TaskList />} />
+        <Route path="/view-task/:taskId" element={<ViewTask />} />
       </Routes>
     </Router>
   );

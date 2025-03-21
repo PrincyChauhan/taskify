@@ -1,9 +1,11 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
-
+import { FaPencil } from "react-icons/fa6";
+import { MdDeleteOutline, MdRemoveRedEye } from "react-icons/md";
 const ViewTask = () => {
+  const navigate = useNavigate();
   const { taskId } = useParams();
   const [task, setTasks] = useState([]);
   const [subtask, setSubtask] = useState([]);
@@ -51,6 +53,10 @@ const ViewTask = () => {
     };
     fetchTaskDetails();
   }, [taskId]);
+
+  const handleCreateSubtask = () => {
+    navigate(`/create-subtask/${taskId}`);
+  };
 
   return (
     <div className="flex flex-row p-10 font-poppins">
@@ -127,12 +133,12 @@ const ViewTask = () => {
       </div>
 
       {/* Subtasks Section */}
-      <div className="bg-white p-8 rounded-lg shadow-lg w-1/2">
+      <div className="bg-white p-8 rounded-lg shadow-lg w-1/2 h-[420px] overflow-y-scroll">
         <div className="flex justify-between items-center mb-8">
-          <h2 className="text-3xl font-bold mb-8 text-[#0C0950]">Subtasks</h2>
-
+          <h2 className="text-3xl font-bold mb-8 text-[#0C0950]">Sub Tasks</h2>
           <button
             type="submit"
+            onClick={handleCreateSubtask}
             className="py-2 px-3 bg-[#0C0950] text-white font-semibold rounded-lg hover:bg-[#161179] focus:outline-none mb-4"
           >
             Add Subtask
@@ -190,6 +196,12 @@ const ViewTask = () => {
                       hour12: true,
                     })}
                   </span>
+                </div>
+
+                {/* Icons for Edit and Delete */}
+                <div className="flex gap-4 mt-4">
+                  <FaPencil className="cursor-pointer hover:text-blue-700" />
+                  <MdDeleteOutline className="cursor-pointer hover:text-red-700" />
                 </div>
               </div>
             ))

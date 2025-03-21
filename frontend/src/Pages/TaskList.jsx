@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Sidebar from "../components/Sidebar";
-import Navbar from "../components/Navbar";
-import { Table, Spin, Modal, Button, Space, Tag } from "antd";
+import { Table, Spin, Modal, Space, Tag } from "antd";
 import axios from "axios";
 import { FaPencil } from "react-icons/fa6";
 import { MdDeleteOutline, MdRemoveRedEye } from "react-icons/md";
@@ -200,9 +198,7 @@ const TaskList = () => {
   return (
     <div>
       <ToastContainer />
-      <Navbar />
       <div className="flex flex-row justify-between">
-        <Sidebar />
         {loading ? (
           <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center bg-white bg-opacity-80">
             <Spin size="large" />

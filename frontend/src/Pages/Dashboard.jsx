@@ -70,29 +70,7 @@ const Dashboard = () => {
 
   return (
     <div className="w-full h-full">
-      <div className="bg-[#0C0950] p-3">
-        <div className="flex justify-between items-center">
-          <div className="text-white font-semibold text-lg">
-            Admin Dashboard
-          </div>
-          <ul className="flex space-x-4">
-            <li>
-              <button
-                onClick={() => {
-                  localStorage.removeItem("token");
-                  window.location.href = "/login";
-                }}
-                className="inline-block w-full px-4 py-2  focus:border-blue-500 text-white"
-              >
-                Logout
-              </button>
-            </li>
-          </ul>
-        </div>
-      </div>
-
       <div className="flex flex-row">
-        <Sidebar />
         {loading ? (
           <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center bg-white bg-opacity-80">
             <Spin size="large" />

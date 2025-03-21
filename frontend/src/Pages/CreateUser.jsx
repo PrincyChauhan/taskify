@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-import Sidebar from "../components/Sidebar";
-import Navbar from "../components/Navbar";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { Spin } from "antd";
@@ -57,9 +55,7 @@ const CreateUser = () => {
   };
   return (
     <div>
-      <Navbar />
       <div className="flex flex-row">
-        <Sidebar />
         <div className="flex flex-col items-center p-10 w-full h-full font-poppins">
           <div className="bg-white p-8 rounded-lg shadow-lg w-1/2 h-1/2">
             <h2 className="text-3xl font-bold text-center mb-8 text-[#0C0950]">

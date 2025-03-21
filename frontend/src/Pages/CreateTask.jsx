@@ -110,14 +110,9 @@ const CreateTask = () => {
   };
   return (
     <div>
-      <div>
-        <Navbar />
-      </div>
       <div className="flex flex-row justify-between">
-        <Sidebar />
-
         <div className="flex flex-col items-center justify-center p-10 w-full h-[100%] font-poppins">
-          <div className="bg-while p-8 rounded-lg shadow-lg  w-[45%] h-full ">
+          <div className="bg-white p-8 rounded-lg shadow-lg  w-[45%] h-full ">
             <h2 className="text-3xl font-bold text-center mb-3 text-[#0C0950]">
               Create Task
             </h2>

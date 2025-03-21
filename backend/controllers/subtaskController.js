@@ -1,34 +1,31 @@
 const { SubTask, Task } = require("../models");
 const sequelize = require("../models");
+
 const createSubTask = async (req, res) => {
-  const t = await sequelize.transaction();
   try {
-    const { title, description, taskId, isCompleted } = req.body;
-    const task = await Task.findByPk(taskId, { transaction: t });
+    const { title, description, taskId } = req.body;
+
+    console.log(req.body, "-----------------req.body");
+
+    const task = await Task.findByPk(taskId);
+
     if (!task) {
-      await t.rollback();
       return res
         .status(404)
         .json({ success: false, message: "Task not found." });
     }
-    const subtask = await SubTask.create(
-      {
-        title,
-        description,
-        taskId,
-        isCompleted: isCompleted ?? false,
-      },
-      {
-        transaction: t,
-      }
-    );
+    const subtask = await SubTask.create({
+      title,
+      description,
+      taskId,
+      // isCompleted: isCompleted ?? false,
+    });
     res.status(201).json({
       success: true,
       message: "Subtask created successfully.",
       subtask,
     });
   } catch (error) {
-    if (t) await t.rollback();
     console.error("Error creating subtask:", error);
     res.status(500).json({ message: "Server error." });
   }

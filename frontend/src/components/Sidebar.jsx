@@ -10,39 +10,27 @@ const Sidebar = () => {
   const navigate = useNavigate();
 
   const onClick = (e) => {
-    if (e.key === "dashboard") {
-      navigate("/dashboard");
-    } else if (e.key === "create-user") {
-      navigate("/create-user");
-    } else if (e.key === "create-task") {
-      navigate("/create-task");
-    } else if (e.key === "tasks") {
-      navigate("/tasks");
-    } else if (e.key === "logout") {
-      // Perform logout logic here
-      console.log("Logging out...");
-      navigate("/login"); // Redirect to login page
-    }
+    navigate(e.key);
   };
 
   const items = [
     {
-      key: "dashboard",
+      key: "/dashboard",
       icon: <AppstoreOutlined />,
       label: "Users List",
     },
     {
-      key: "create-user",
+      key: "/create-user",
       icon: <PlusOutlined />,
       label: "Create User",
     },
     {
-      key: "create-task",
+      key: "/create-task",
       icon: <ProfileOutlined />,
       label: "Create Task",
     },
     {
-      key: "tasks",
+      key: "/tasks",
       icon: <AppstoreOutlined />,
       label: "Tasks List",
     },

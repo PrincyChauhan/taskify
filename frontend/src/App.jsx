@@ -9,6 +9,7 @@ import ViewTask from "./Pages/ViewTask";
 import CreateSubTask from "./Pages/CreateSubTask";
 import Navbar from "./components/Navbar";
 import Sidebar from "./components/Sidebar";
+import UpdateTask from "./Pages/UpdateTask";
 const App = () => {
   const showSidebar =
     window.location.pathname !== "/login" &&
@@ -28,6 +29,7 @@ const App = () => {
             <Route path="/create-task" element={<CreateTask />} />
             <Route path="/tasks" element={<TaskList />} />
             <Route path="/view-task/:taskId" element={<ViewTask />} />
+            <Route path="/update-task/:taskId" element={<UpdateTask />} />
             <Route path="/create-subtask/:taskId" element={<CreateSubTask />} />
           </Routes>
         </div>

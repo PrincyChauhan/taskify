@@ -5,6 +5,12 @@ const commonFields = require("./commonFields");
 const Subtask = sequelize.define(
   "Subtask",
   {
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+    },
+
     title: {
       type: DataTypes.STRING,
       allowNull: false,

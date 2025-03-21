@@ -120,6 +120,11 @@ const TaskList = () => {
   const handleViewTask = (taskId) => {
     navigate(`/view-task/${taskId}`);
   };
+
+  const handleUpdateTask = (taskId) => {
+    navigate(`/update-task/${taskId}`);
+  };
+
   const columns = [
     {
       title: "Task title",
@@ -185,7 +190,7 @@ const TaskList = () => {
             <MdRemoveRedEye />
           </button>
           <button>
-            <FaPencil />
+            <FaPencil onClick={() => handleUpdateTask(record.id)} />
           </button>
           <button onClick={() => showModal(record.id)}>
             <MdDeleteOutline></MdDeleteOutline>

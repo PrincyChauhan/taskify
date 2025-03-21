@@ -53,20 +53,25 @@ const updateTaskWithSubtasks = async (req, res) => {
         .status(404)
         .json({ success: false, message: "Task not found." });
     }
+
+    // Update the main task
     await task.update({
       title: title || task.title,
       description: description || task.description,
       dueDate: dueDate || task.dueDate,
       assignedTo: assignedTo || task.assignedTo,
     });
+
+    // Update or create subtasks using upsert
     if (Array.isArray(subtasks)) {
-      await SubTask.destroy({ where: { taskId } });
-      const subtasksToCreate = subtasks.map((subtask) => ({
-        ...subtask,
-        taskId,
-      }));
-      await SubTask.bulkCreate(subtasksToCreate);
+      await Promise.all(
+        subtasks.map(async (subtask) => {
+          await SubTask.upsert({ ...subtask, taskId });
+        })
+      );
     }
+
+    // Fetch updated task with subtasks
     const updatedTask = await Task.findByPk(taskId, {
       include: { model: SubTask, as: "subtasks" },
     });

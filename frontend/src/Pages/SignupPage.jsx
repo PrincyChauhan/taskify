@@ -4,6 +4,7 @@ import { ToastContainer, toast } from "react-toastify";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
 import { Spin } from "antd";
+import { MdRemoveRedEye } from "react-icons/md";
 
 const SignupPage = () => {
   const [formData, setFormData] = useState({
@@ -17,6 +18,16 @@ const SignupPage = () => {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
+  const togglePasswordVisibility = (field) => {
+    if (field === "password") {
+      setShowPassword(!showPassword);
+    } else {
+      setShowConfirmPassword(!showConfirmPassword);
+    }
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -98,7 +109,7 @@ const SignupPage = () => {
               />
             </div>
 
-            <div className="mb-6">
+            {/* <div className="mb-6">
               <label className="block text-sm font-medium text-gray-700 mb-2">
                 Password
               </label>
@@ -111,9 +122,9 @@ const SignupPage = () => {
                 className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
                 required
               />
-            </div>
+            </div> */}
 
-            <div className="mb-6">
+            {/* <div className="mb-6">
               <label className="block text-sm font-medium text-gray-700 mb-2">
                 Confirm Password
               </label>
@@ -126,7 +137,36 @@ const SignupPage = () => {
                 className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
                 required
               />
-            </div>
+            </div> */}
+            {["password", "confirmPassword"].map((field, index) => (
+              <div className="mb-6" key={index}>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  {field === "password" ? "Password" : "Confirm Password"}
+                </label>
+                <div className="relative">
+                  <input
+                    type={
+                      (field === "password" && showPassword) ||
+                      (field === "confirmPassword" && showConfirmPassword)
+                        ? "text"
+                        : "password"
+                    }
+                    id={field}
+                    name={field}
+                    value={formData[field]}
+                    onChange={handleChange}
+                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+                    required
+                  />
+                  <MdRemoveRedEye
+                    className="absolute right-3 top-3 cursor-pointer"
+                    size={24}
+                    onClick={() => togglePasswordVisibility(field)}
+                  />
+                </div>
+              </div>
+            ))}
+
             {error && <div className="text-red-500 text-sm mb-4">{error}</div>}
             {success && (
               <div className="text-green-500 text-sm mb-4">{success}</div>

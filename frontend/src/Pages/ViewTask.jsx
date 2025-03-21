@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { FaPencil } from "react-icons/fa6";
-import { MdDeleteOutline, MdRemoveRedEye } from "react-icons/md";
+import { MdDeleteOutline } from "react-icons/md";
 const ViewTask = () => {
   const navigate = useNavigate();
   const { taskId } = useParams();

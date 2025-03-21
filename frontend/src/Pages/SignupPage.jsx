@@ -4,7 +4,7 @@ import { ToastContainer, toast } from "react-toastify";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
 import { Spin } from "antd";
-import { MdRemoveRedEye } from "react-icons/md";
+import { MdRemoveRedEye, MdVisibilityOff } from "react-icons/md";
 
 const SignupPage = () => {
   const [formData, setFormData] = useState({
@@ -158,11 +158,20 @@ const SignupPage = () => {
                     className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
                     required
                   />
-                  <MdRemoveRedEye
-                    className="absolute right-3 top-3 cursor-pointer"
-                    size={24}
-                    onClick={() => togglePasswordVisibility(field)}
-                  />
+                  {(field === "password" && showPassword) ||
+                  (field === "confirmPassword" && showConfirmPassword) ? (
+                    <MdRemoveRedEye
+                      className="absolute right-3 top-3 cursor-pointer"
+                      size={24}
+                      onClick={() => togglePasswordVisibility(field)}
+                    />
+                  ) : (
+                    <MdVisibilityOff
+                      className="absolute right-3 top-3 cursor-pointer"
+                      size={24}
+                      onClick={() => togglePasswordVisibility(field)}
+                    />
+                  )}
                 </div>
               </div>
             ))}

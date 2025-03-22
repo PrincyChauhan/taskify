@@ -5,8 +5,6 @@ const createSubTask = async (req, res) => {
   try {
     const { title, description, taskId } = req.body;
 
-    console.log(req.body, "-----------------req.body");
-
     const task = await Task.findByPk(taskId);
 
     if (!task) {
@@ -82,7 +80,9 @@ const deleteSubTask = async (req, res) => {
     subtask.isDeleted = true;
     await subtask.save();
     await subtask.destroy();
-    res.status(200).json({ message: "Subtask deleted successfully." });
+    res
+      .status(200)
+      .json({ message: "Subtask deleted successfully.", success: true });
   } catch (error) {
     console.error("Error deleting subtask:", error);
     res.status(500).json({ message: "Server error." });

@@ -1,9 +1,11 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { Modal } from "antd";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { FaPencil } from "react-icons/fa6";
 import { MdDeleteOutline } from "react-icons/md";
+import { ExclamationCircleOutlined } from "@ant-design/icons";
 
 const ViewTask = () => {
   const navigate = useNavigate();
@@ -12,6 +14,23 @@ const ViewTask = () => {
   const [subtask, setSubtask] = useState([]);
   const [loading, setLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
+  const [currentSubTaskId, setSubCurrentTaskId] = useState(null);
+  const [open, setOpen] = useState(false);
+  const showModal = (subTaskId) => {
+    setSubCurrentTaskId(subTaskId);
+    setOpen(true);
+  };
+
+  const hideModal = () => {
+    setOpen(false);
+    setSubCurrentTaskId(null);
+  };
+
+  const confirmDelete = async () => {
+    if (currentSubTaskId) {
+      await handleDeleteSubtask(currentSubTaskId, taskId);
+    }
+  };
 
   useEffect(() => {
     const fetchTaskDetails = async () => {
@@ -61,6 +80,37 @@ const ViewTask = () => {
 
   const handleUpdateSubtask = (subTaskId) => {
     navigate(`/update-subtask/${taskId}/${subTaskId}`);
+  };
+
+  const handleDeleteSubtask = async (subtaskId, taskId) => {
+    try {
+      const token = localStorage.getItem("token");
+      const response = await axios.post(
+        `http://localhost:3000/subtask/delete-subtask`,
+        {
+          subtaskId,
+          taskId,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      if (response.data.success) {
+        toast.success("Subtask deleted successfully");
+        setSubtask((prevSubTasks) =>
+          prevSubTasks.filter((subtask) => subtask.id !== subtaskId)
+        );
+        hideModal();
+      } else {
+        toast.error("Failed to delete");
+      }
+    } catch (error) {
+      console.log(error);
+      setErrorMessage("An error occurred while deleting subtask.");
+      toast.error("An error occurred while deleting subtask.");
+    }
   };
 
   return (
@@ -209,7 +259,10 @@ const ViewTask = () => {
                     className="cursor-pointer hover:text-blue-700"
                     onClick={() => handleUpdateSubtask(subtask.id)}
                   />
-                  <MdDeleteOutline className="cursor-pointer hover:text-red-700" />
+                  <MdDeleteOutline
+                    className="cursor-pointer hover:text-red-700"
+                    onClick={() => showModal(subtask.id)}
+                  />
                 </div>
               </div>
             ))
@@ -218,6 +271,17 @@ const ViewTask = () => {
           )}
         </div>
       </div>
+
+      <Modal
+        title="Confirm Delete"
+        open={open}
+        onOk={confirmDelete}
+        onCancel={hideModal}
+        okText="Delete"
+        cancelText="Cancel"
+      >
+        <p>Are you sure you want to delete this subtask?</p>
+      </Modal>
     </div>
   );
 };

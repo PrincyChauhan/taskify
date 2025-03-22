@@ -4,6 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { FaPencil } from "react-icons/fa6";
 import { MdDeleteOutline } from "react-icons/md";
+
 const ViewTask = () => {
   const navigate = useNavigate();
   const { taskId } = useParams();
@@ -56,6 +57,10 @@ const ViewTask = () => {
 
   const handleCreateSubtask = () => {
     navigate(`/create-subtask/${taskId}`);
+  };
+
+  const handleUpdateSubtask = (subTaskId) => {
+    navigate(`/update-subtask/${taskId}/${subTaskId}`);
   };
 
   return (
@@ -200,7 +205,10 @@ const ViewTask = () => {
 
                 {/* Icons for Edit and Delete */}
                 <div className="flex gap-4 mt-4">
-                  <FaPencil className="cursor-pointer hover:text-blue-700" />
+                  <FaPencil
+                    className="cursor-pointer hover:text-blue-700"
+                    onClick={() => handleUpdateSubtask(subtask.id)}
+                  />
                   <MdDeleteOutline className="cursor-pointer hover:text-red-700" />
                 </div>
               </div>

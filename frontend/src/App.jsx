@@ -10,6 +10,8 @@ import CreateSubTask from "./Pages/CreateSubTask";
 import Navbar from "./components/Navbar";
 import Sidebar from "./components/Sidebar";
 import UpdateTask from "./Pages/UpdateTask";
+import UpdateSubTask from "./Pages/UpdateSubTask";
+
 const App = () => {
   const showSidebar =
     window.location.pathname !== "/login" &&
@@ -31,6 +33,10 @@ const App = () => {
             <Route path="/view-task/:taskId" element={<ViewTask />} />
             <Route path="/update-task/:taskId" element={<UpdateTask />} />
             <Route path="/create-subtask/:taskId" element={<CreateSubTask />} />
+            <Route
+              path="/update-subtask/:taskId/:subtaskId"
+              element={<UpdateSubTask />}
+            />
           </Routes>
         </div>
       </div>

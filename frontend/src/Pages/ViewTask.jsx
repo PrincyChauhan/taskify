@@ -137,7 +137,7 @@ const ViewTask = () => {
           <label className="text-md font-medium text-gray-700 mr-2">
             Assigned User:
           </label>
-          {/* <span>{task.assignedToUser.username}</span> */}
+          <span>{task?.assignedToUser?.username}</span>
         </div>
 
         <div className="mb-4 flex items-center">

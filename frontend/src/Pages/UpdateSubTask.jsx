@@ -7,6 +7,7 @@ const UpdateSubTask = () => {
   const [subtask, setSubtask] = useState({
     title: "",
     description: "",
+    isCompleted: false,
   });
 
   const [error, setError] = useState("");
@@ -120,6 +121,26 @@ const UpdateSubTask = () => {
                     onChange={handleChange}
                   ></textarea>
                 </div>
+
+                <div className="mb-4 flex items-right">
+                  <label className="block text-sm font-medium text-gray-700 mr-1">
+                    Is Completed
+                  </label>
+
+                  <input
+                    type="checkbox"
+                    name="isCompleted"
+                    checked={subtask.isCompleted}
+                    className="w-5 h-5"
+                    onChange={(e) =>
+                      setSubtask((prev) => ({
+                        ...prev,
+                        isCompleted: e.target.checked,
+                      }))
+                    }
+                  ></input>
+                </div>
+
                 <button
                   type="submit"
                   className="w-full py-2 px-4 bg-[#0C0950] text-white font-semibold rounded-lg hover:bg-[#161179] focus:outline-none"

@@ -2,6 +2,7 @@ import {
   BrowserRouter as Router,
   Routes,
   Route,
+  Navigate,
   useLocation,
 } from "react-router-dom";
 import Signup from "./Pages/SignupPage";
@@ -35,23 +36,39 @@ const Layout = ({ children }) => {
 const App = () => {
   return (
     <Router>
-      <Layout>
-        <Routes>
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/create-user" element={<CreateUser />} />
-          <Route path="/create-task" element={<CreateTask />} />
-          <Route path="/tasks" element={<TaskList />} />
-          <Route path="/view-task/:taskId" element={<ViewTask />} />
-          <Route path="/update-task/:taskId" element={<UpdateTask />} />
-          <Route path="/create-subtask/:taskId" element={<CreateSubTask />} />
-          <Route
-            path="/update-subtask/:taskId/:subtaskId"
-            element={<UpdateSubTask />}
-          />
-        </Routes>
-      </Layout>
+      <Routes>
+        {/* Redirect from root to login */}
+        <Route path="/" element={<Navigate to="/login" replace />} />
+
+        {/* Routes without Layout */}
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/login" element={<Login />} />
+
+        {/* Routes with Layout */}
+        <Route
+          path="/*"
+          element={
+            <Layout>
+              <Routes>
+                <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/create-user" element={<CreateUser />} />
+                <Route path="/create-task" element={<CreateTask />} />
+                <Route path="/tasks" element={<TaskList />} />
+                <Route path="/view-task/:taskId" element={<ViewTask />} />
+                <Route path="/update-task/:taskId" element={<UpdateTask />} />
+                <Route
+                  path="/create-subtask/:taskId"
+                  element={<CreateSubTask />}
+                />
+                <Route
+                  path="/update-subtask/:taskId/:subtaskId"
+                  element={<UpdateSubTask />}
+                />
+              </Routes>
+            </Layout>
+          }
+        />
+      </Routes>
     </Router>
   );
 };

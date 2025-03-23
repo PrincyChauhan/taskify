@@ -135,8 +135,18 @@ const CreateUser = () => {
                     className="w-full px-4 py-2 border border-gray-300 rounded-md"
                     required
                   >
-                    <option value="">Select Role</option>
-                    <option value="user">User</option>
+                    <option
+                      value=""
+                      className="bg-[#0C0950] text-white font-semibold hover:bg-[#161179]"
+                    >
+                      Select Role
+                    </option>
+                    <option
+                      value="user"
+                      className="bg-[#0C0950] text-white font-semibold hover:bg-[#161179]"
+                    >
+                      User
+                    </option>
                   </select>
                 </div>
 

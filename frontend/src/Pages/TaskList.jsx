@@ -154,6 +154,7 @@ const TaskList = () => {
               color: status === "pending" ? "white" : "#000",
               borderColor: status === "pending" ? "red" : "#d9d9d9",
             }}
+            onClick={() => handleStatusChange(record.id, "pending")}
           >
             Pending
           </Tag>
@@ -175,6 +176,7 @@ const TaskList = () => {
               color: status === "completed" ? "white" : "#000",
               borderColor: status === "completed" ? "green" : "#d9d9d9",
             }}
+            onClick={() => handleStatusChange(record.id, "completed")}
           >
             Completed
           </Tag>

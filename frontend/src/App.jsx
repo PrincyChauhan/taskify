@@ -17,16 +17,16 @@ import Navbar from "./components/Navbar";
 import Sidebar from "./components/Sidebar";
 import UpdateTask from "./Pages/UpdateTask";
 import UpdateSubTask from "./Pages/UpdateSubTask";
-
+import UserTasks from "./Pages/UserTasks";
 const Layout = ({ children }) => {
   const location = useLocation();
   const showSidebar = !["/login", "/signup"].includes(location.pathname);
-
+  const role = localStorage.getItem("role");
   return (
     <>
       {showSidebar && <Navbar />}
       <div className="flex">
-        {showSidebar && <Sidebar />}
+        {showSidebar && role === "admin" && <Sidebar />}
         <div className="flex-grow">{children}</div>
       </div>
     </>
@@ -64,6 +64,7 @@ const App = () => {
                   path="/update-subtask/:taskId/:subtaskId"
                   element={<UpdateSubTask />}
                 />
+                <Route path="/assign-task" element={<UserTasks />} />
               </Routes>
             </Layout>
           }

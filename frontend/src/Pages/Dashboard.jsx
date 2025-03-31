@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import Sidebar from "../components/Sidebar";
 import { Table, Tag, Spin } from "antd";
 
 const Dashboard = () => {

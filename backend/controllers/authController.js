@@ -175,13 +175,6 @@ const findUser = async (req, res) => {
   res.status(200).json({ data: user, created: created });
 };
 
-const rawQuery = async (req, res) => {
-  const users = await sequelize.query("SELECT * FROM `users`", {
-    type: QueryTypes.SELECT,
-  });
-  res.status(200).json({ data: users });
-};
-
 module.exports = {
   adminSignup,
   createAndInviteUser,
@@ -189,5 +182,4 @@ module.exports = {
   getAllUsers,
   queryUser,
   findUser,
-  rawQuery,
 };

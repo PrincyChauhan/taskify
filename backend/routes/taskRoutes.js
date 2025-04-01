@@ -10,7 +10,7 @@ router.post(
   taskController.updateTaskWithSubtasks
 );
 router.get("/get-tasks", isAdmin, taskController.getAllTasks);
-router.get("/get-task/:taskId", isAdmin, taskController.getTaskbyId);
+router.get("/get-task/:taskId", taskController.getTaskbyId);
 router.delete("/delete-task/:taskId", isAdmin, taskController.deleteTaskById);
 router.post("/update-task-status", taskController.updateTaskStatus);
 module.exports = router;

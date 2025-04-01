@@ -205,7 +205,7 @@ const ViewTask = () => {
               <div key={index} className="mb-4 border-b pb-4">
                 <div>
                   <label className="text-md font-medium text-gray-700 mr-2">
-                    Title:
+                    Subtask Title:
                   </label>
                   <span>{subtask.title}</span>
                 </div>
@@ -255,7 +255,7 @@ const ViewTask = () => {
                 {/* Icons for Edit and Delete */}
                 <div className="flex gap-4 mt-4">
                   <FaPencil
-                    className="cursor-pointer hover:text-blue-700"
+                    className="cursor-pointer hover:text-gray-700"
                     onClick={() => handleUpdateSubtask(subtask.id)}
                   />
                   <MdDeleteOutline

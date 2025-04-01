@@ -12,6 +12,12 @@ const getTasksByUserId = async (req, res) => {
         {
           model: User,
           as: "assignedToUser",
+          attributes: ["id", "username"],
+        },
+        {
+          model: User,
+          as: "taskCreatedBy",
+          attributes: ["id", "username"],
         },
       ],
     });

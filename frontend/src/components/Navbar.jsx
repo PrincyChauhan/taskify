@@ -8,20 +8,16 @@ const Navbar = () => {
         <div className="text-white font-semibold text-lg">
           {role === "admin" ? "Admin Dashboard" : "Assign Tasks"}
         </div>
+        <button
+          onClick={() => {
+            localStorage.removeItem("token");
+            window.location.href = "/login";
+          }}
+          className="text-white font-semibold text-lg px-4 py-2 bg-[#0C0950] hover:bg-[#161179] rounded-md"
+        >
+          Logout
+        </button>
       </div>
-      <ul className="flex space-x-4">
-        <li>
-          <button
-            onClick={() => {
-              localStorage.removeItem("token");
-              window.location.href = "/login";
-            }}
-            className="inline-block w-full text-right focus:border-blue-500 text-white font-semibold text-lg absolute top-0 right-2 size-16"
-          >
-            Logout
-          </button>
-        </li>
-      </ul>
     </div>
   );
 };

@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from "react";
-import { Table, Tag, Space, Button } from "antd";
-import { EyeOutlined } from "@ant-design/icons";
+import { Table, Tag, Space } from "antd";
+import { MdRemoveRedEye } from "react-icons/md";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useNavigate } from "react-router-dom";
 
 const UserTasks = () => {
+  const navigate = useNavigate();
   const [tasks, setTasks] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
-  const role = localStorage.getItem("role");
 
   useEffect(() => {
     const fetchTasks = async () => {
@@ -62,6 +63,10 @@ const UserTasks = () => {
     }
   };
 
+  const handleViewTask = (taskId) => {
+    navigate(`/user-view-task/${taskId}`);
+  };
+
   const columns = [
     {
       title: "Task Title",
@@ -69,9 +74,9 @@ const UserTasks = () => {
       key: "title",
     },
     {
-      title: "Assigned User",
-      dataIndex: "assignedTo",
-      key: "assignedTo",
+      title: "Created By",
+      dataIndex: ["taskCreatedBy", "username"],
+      key: "createdBy",
     },
     {
       title: "Due Date",
@@ -126,7 +131,9 @@ const UserTasks = () => {
       key: "action",
       render: (text, record) => (
         <Space size="middle">
-          <Button type="link" icon={<EyeOutlined />} />
+          <button onClick={() => handleViewTask(record.id)}>
+            <MdRemoveRedEye />
+          </button>
         </Space>
       ),
     },

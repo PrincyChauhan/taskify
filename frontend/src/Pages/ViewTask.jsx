@@ -5,7 +5,6 @@ import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { FaPencil } from "react-icons/fa6";
 import { MdDeleteOutline } from "react-icons/md";
-import { ExclamationCircleOutlined } from "@ant-design/icons";
 
 const ViewTask = () => {
   const navigate = useNavigate();

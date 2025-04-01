@@ -18,6 +18,8 @@ import Sidebar from "./components/Sidebar";
 import UpdateTask from "./Pages/UpdateTask";
 import UpdateSubTask from "./Pages/UpdateSubTask";
 import UserTasks from "./Pages/UserTasks";
+import UserViewTask from "./Pages/UserViewTask";
+
 const Layout = ({ children }) => {
   const location = useLocation();
   const showSidebar = !["/login", "/signup"].includes(location.pathname);
@@ -65,6 +67,10 @@ const App = () => {
                   element={<UpdateSubTask />}
                 />
                 <Route path="/assign-task" element={<UserTasks />} />
+                <Route
+                  path="/user-view-task/:taskId"
+                  element={<UserViewTask />}
+                />
               </Routes>
             </Layout>
           }

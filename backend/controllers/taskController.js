@@ -222,6 +222,44 @@ const updateTaskStatus = async (req, res) => {
   }
 };
 
+const getTaskCounts = async (req, res) => {
+  try {
+    const totalTasks = await Task.count({
+      where: {
+        isDeleted: false,
+      },
+    });
+    const inProgressTasks = await Task.count({
+      where: {
+        status: "in-progress",
+        isDeleted: false,
+      },
+    });
+    const pendingTasks = await Task.count({
+      where: {
+        status: "pending",
+        isDeleted: false,
+      },
+    });
+    const completedTasks = await Task.count({
+      where: {
+        status: "completed",
+        isDeleted: false,
+      },
+    });
+    res.status(200).json({
+      message: "Task counts fetched successfully",
+      totalTasks,
+      inProgressTasks,
+      completedTasks,
+      pendingTasks,
+    });
+  } catch (error) {
+    console.error("Error fetching task counts:", error);
+    res.status(500).json({ message: "Server error." });
+  }
+};
+
 module.exports = {
   createTaskWithSubtasks,
   updateTaskWithSubtasks,
@@ -229,4 +267,5 @@ module.exports = {
   getTaskbyId,
   deleteTaskById,
   updateTaskStatus,
+  getTaskCounts,
 };

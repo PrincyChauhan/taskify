@@ -108,9 +108,24 @@ const getSubTaskById = async (req, res) => {
     res.status(500).json({ message: "Server error." });
   }
 };
+
+const countSubTask = async (req, res) => {
+  try {
+    const totalSubTasks = await SubTask.count({
+      where: {
+        isDeleted: false,
+      },
+    });
+    res.status(200).json({
+      message: "SubTask counts fetched successfully",
+      totalSubTasks,
+    });
+  } catch (error) {}
+};
 module.exports = {
   createSubTask,
   updateSubTask,
   deleteSubTask,
   getSubTaskById,
+  countSubTask,
 };

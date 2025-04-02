@@ -131,12 +131,15 @@ const getAllUsers = async (req, res) => {
         role: "user",
       },
     });
+    const userCount = users.length;
     if (!users.length) {
       return res.status(404).json({
         message: "No User found.",
       });
     }
-    res.status(200).json({ message: "users fetch successfully", users });
+    res
+      .status(200)
+      .json({ message: "users fetch successfully", users, userCount });
   } catch (error) {
     await t.rollback();
     console.error("Error getting all users:", error.message);
@@ -144,42 +147,9 @@ const getAllUsers = async (req, res) => {
   }
 };
 
-const queryUser = async (req, res) => {
-  try {
-    const data = await User.findAll({
-      where: {
-        role: "user",
-      },
-    });
-
-    res.status(200).json({
-      data: data,
-    });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: "An error occurred while querying users" });
-  }
-};
-
-const findUser = async (req, res) => {
-  const [user, created] = await User.findOrCreate({
-    where: {
-      username: "Princy",
-      email: "test@gmail.com",
-    },
-    defaults: {
-      password: "1233789456",
-      role: "admin",
-    },
-  });
-  res.status(200).json({ data: user, created: created });
-};
-
 module.exports = {
   adminSignup,
   createAndInviteUser,
   signin,
   getAllUsers,
-  queryUser,
-  findUser,
 };

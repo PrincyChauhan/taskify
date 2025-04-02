@@ -11,5 +11,6 @@ router.get(
   isAdmin,
   subTaskController.getSubTaskById
 );
+router.get("/subtask-count", subTaskController.countSubTask);
 
 module.exports = router;

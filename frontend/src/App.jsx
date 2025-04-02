@@ -19,6 +19,7 @@ import UpdateTask from "./Pages/UpdateTask";
 import UpdateSubTask from "./Pages/UpdateSubTask";
 import UserTasks from "./Pages/UserTasks";
 import UserViewTask from "./Pages/UserViewTask";
+import DetailPage from "./Pages/DetailPage";
 
 const Layout = ({ children }) => {
   const location = useLocation();
@@ -71,6 +72,7 @@ const App = () => {
                   path="/user-view-task/:taskId"
                   element={<UserViewTask />}
                 />
+                <Route path="/details" element={<DetailPage />} />
               </Routes>
             </Layout>
           }

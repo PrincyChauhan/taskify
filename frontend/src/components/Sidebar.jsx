@@ -2,6 +2,7 @@ import {
   AppstoreOutlined,
   PlusOutlined,
   ProfileOutlined,
+  DatabaseOutlined,
 } from "@ant-design/icons";
 import { Menu } from "antd";
 import { useNavigate } from "react-router-dom";
@@ -33,6 +34,11 @@ const Sidebar = () => {
       key: "/tasks",
       icon: <AppstoreOutlined />,
       label: "Tasks List",
+    },
+    {
+      key: "/details",
+      icon: <DatabaseOutlined />,
+      label: "Details",
     },
   ];
 

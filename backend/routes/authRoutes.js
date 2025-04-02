@@ -7,6 +7,5 @@ router.post("/admin/signup", authcontroller.adminSignup);
 router.post("/create-invite-user", isAdmin, authcontroller.createAndInviteUser);
 router.post("/signin", authcontroller.signin);
 router.get("/get-users", isAdmin, authcontroller.getAllUsers);
-router.get("/query-user", authcontroller.findUser);
 
 module.exports = router;

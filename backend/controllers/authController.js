@@ -1,5 +1,4 @@
 const { User, sequelize } = require("../models");
-
 const bcrypt = require("bcrypt");
 const sendMail = require("../utils/mail");
 const jwt = require("jsonwebtoken");
@@ -40,6 +39,7 @@ const adminSignup = async (req, res) => {
 const signin = async (req, res) => {
   try {
     const { email, password } = req.body;
+
     const user = await User.findOne({ where: { email } });
     if (!user) {
       return res

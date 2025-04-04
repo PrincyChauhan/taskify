@@ -42,11 +42,18 @@ const LoginPage = () => {
             navigate("/assign-task");
           }
         }, 500);
-      } else {
-        setError("Failed to login.");
       }
     } catch (error) {
-      setError("Error while logging in: " + error.message);
+      // Display backend error message if available
+      if (
+        error.response &&
+        error.response.data &&
+        error.response.data.message
+      ) {
+        setError(error.response.data.message);
+      } else {
+        setError("Error while logging in: " + error.message);
+      }
     } finally {
       setLoading(false);
     }
@@ -108,10 +115,7 @@ const LoginPage = () => {
                 )}
               </span>
             </div>
-            {error && <div className="text-red-500 text-sm mb-4">{error}</div>}
-            {success && (
-              <div className="text-green-500 text-sm mb-4">{success}</div>
-            )}
+
             <button
               type="submit"
               className="w-full py-2 px-4 bg-[#0C0950] text-white font-semibold rounded-lg hover:bg-[#161179] focus:outline-none"

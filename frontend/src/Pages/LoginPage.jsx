@@ -37,7 +37,7 @@ const LoginPage = () => {
         setTimeout(() => {
           setSuccess("");
           if (role === "admin") {
-            navigate("/dashboard");
+            navigate("/details");
           } else if (role === "user") {
             navigate("/assign-task");
           }

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { use, useEffect, useState } from "react";
 import { Table, Spin, Modal, Space, Tag } from "antd";
 import axios from "axios";
 import { FaPencil } from "react-icons/fa6";
@@ -15,7 +15,7 @@ const TaskList = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const [open, setOpen] = useState(false);
   const [currentTaskId, setCurrentTaskId] = useState(null);
-
+  const [searchTerm, setSearchTerm] = useState("");
   const showModal = (taskId) => {
     setCurrentTaskId(taskId);
     setOpen(true);
@@ -24,6 +24,10 @@ const TaskList = () => {
     setOpen(false);
     setCurrentTaskId(null);
   };
+
+  const filteredTasks = tasks.filter((task) =>
+    task.title?.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   useEffect(() => {
     const fetchData = async () => {
@@ -140,6 +144,7 @@ const TaskList = () => {
       title: "Due Date",
       dataIndex: "dueDate",
       key: "dueDate",
+      render: (dueDate) => new Date(dueDate).toLocaleDateString(),
     },
     {
       title: "Task Status",
@@ -205,6 +210,17 @@ const TaskList = () => {
   return (
     <div>
       <ToastContainer />
+
+      <div className="mb-4 mt-2 ml-2 flex w-full">
+        <input
+          type="text"
+          placeholder="Search tasks..."
+          onChange={(e) => setSearchTerm(e.target.value)}
+          value={searchTerm}
+          className="px-4 py-2 mr-3 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-gray-200 w-full"
+        />
+      </div>
+
       <div className="flex flex-row justify-between">
         {loading ? (
           <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center bg-white bg-opacity-80">
@@ -215,7 +231,7 @@ const TaskList = () => {
         ) : (
           <Table
             columns={columns}
-            dataSource={tasks}
+            dataSource={filteredTasks}
             style={{ width: "100%", height: "100%" }}
           />
         )}

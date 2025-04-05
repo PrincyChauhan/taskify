@@ -16,6 +16,12 @@ const Sidebar = () => {
 
   const items = [
     {
+      key: "/details",
+      icon: <DatabaseOutlined />,
+      label: "Details",
+    },
+
+    {
       key: "/dashboard",
       icon: <AppstoreOutlined />,
       label: "Users List",
@@ -34,11 +40,6 @@ const Sidebar = () => {
       key: "/tasks",
       icon: <AppstoreOutlined />,
       label: "Tasks List",
-    },
-    {
-      key: "/details",
-      icon: <DatabaseOutlined />,
-      label: "Details",
     },
   ];
 

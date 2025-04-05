@@ -3,7 +3,7 @@ import React from "react";
 const Navbar = () => {
   const role = localStorage.getItem("role");
   return (
-    <div className="bg-[#0C0950] p-4">
+    <div className="bg-[#0C0950] p-4 w-full">
       <div className="flex justify-between items-center">
         <div className="text-white font-semibold text-lg">
           {role === "admin" ? "Admin Dashboard" : "Assign Tasks"}

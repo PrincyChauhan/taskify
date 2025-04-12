@@ -22,6 +22,10 @@ app.use("/task", taskRoutes);
 app.use("/subtask", subTaskRoutes);
 app.use("/user", userRoutes);
 
+app.get("/ping", (req, res) => {
+  res.status(200).send("Server is running!");
+});
+
 app.listen(3000, () => {
   console.log("Server is running on port 3000");
 });

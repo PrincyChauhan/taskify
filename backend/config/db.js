@@ -12,6 +12,8 @@ const sequelize = new Sequelize(
   }
 );
 
+console.log(process.env.DATABASE_NAME);
+
 try {
   sequelize.authenticate();
   console.log("Connection has been established successfully.");

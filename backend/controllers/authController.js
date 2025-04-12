@@ -109,7 +109,7 @@ const createAndInviteUser = async (req, res) => {
           <li>Email:${email}</li>
           <li>Password: ${password}</li>
         </ul>
-        <p>Please log in to your account and change your password.</p>
+        <p>Please log in to your account with this password use this link https://taskify-frontend-liart.vercel.app/login </p>
       `;
 
     await sendMail({ email }, "You're Invited to Our Platform!", inviteMessage);

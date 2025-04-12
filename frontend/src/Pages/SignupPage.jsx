@@ -44,7 +44,7 @@ const SignupPage = () => {
     setLoading(true);
     try {
       const response = await axios.post(
-        `http://localhost:3000/auth/admin/signup`,
+        `https://taskify-backend-ykux.onrender.com/auth/admin/signup`,
         formData
       );
       if (response.data.success) {

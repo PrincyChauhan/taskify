@@ -17,7 +17,7 @@ const UserTasks = () => {
       const userId = localStorage.getItem("userId");
       try {
         const response = await axios.get(
-          `http://localhost:3000/user/get-tasks/${userId}`
+          `https://taskify-backend-ykux.onrender.com/user/get-tasks/${userId}`
         );
         if (response.data.tasksByUserId.length > 0) {
           setTasks(response.data.tasksByUserId);
@@ -43,7 +43,7 @@ const UserTasks = () => {
         return;
       }
       const response = await axios.post(
-        "http://localhost:3000/task/update-task-status",
+        "https://taskify-backend-ykux.onrender.com/task/update-task-status",
         { taskId, newStatus },
         { headers: { Authorization: `Bearer ${token}` } }
       );

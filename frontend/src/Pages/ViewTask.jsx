@@ -41,7 +41,7 @@ const ViewTask = () => {
       }
       try {
         const response = await axios.get(
-          `http://localhost:3000/task/get-task/${taskId}`,
+          `https://taskify-backend-ykux.onrender.com/task/get-task/${taskId}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -85,7 +85,7 @@ const ViewTask = () => {
     try {
       const token = localStorage.getItem("token");
       const response = await axios.post(
-        `http://localhost:3000/subtask/delete-subtask`,
+        `https://taskify-backend-ykux.onrender.com/subtask/delete-subtask`,
         {
           subtaskId,
           taskId,

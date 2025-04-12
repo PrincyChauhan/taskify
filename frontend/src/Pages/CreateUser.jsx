@@ -33,7 +33,7 @@ const CreateUser = () => {
     setLoading(true);
     try {
       const response = await axios.post(
-        "http://localhost:3000/auth/create-invite-user",
+        "https://taskify-backend-ykux.onrender.com/auth/create-invite-user",
         formData,
         {
           headers: {

@@ -24,7 +24,7 @@ const UpdateTask = () => {
       try {
         const token = localStorage.getItem("token");
         const response = await axios.get(
-          "http://localhost:3000/auth/get-users",
+          "https://taskify-backend-ykux.onrender.com/auth/get-users",
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -34,7 +34,7 @@ const UpdateTask = () => {
         setUsers(response.data.users);
 
         const taskResponse = await axios.get(
-          ` http://localhost:3000/task/get-task/${taskId}`,
+          ` https://taskify-backend-ykux.onrender.com/task/get-task/${taskId}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -110,7 +110,7 @@ const UpdateTask = () => {
 
     try {
       const response = await axios.post(
-        `http://localhost:3000/task/update-task/${taskId}`,
+        `https://taskify-backend-ykux.onrender.com/task/update-task/${taskId}`,
         formData,
         {
           headers: {

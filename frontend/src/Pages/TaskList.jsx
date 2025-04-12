@@ -41,12 +41,18 @@ const TaskList = () => {
       }
       try {
         const [userResponse, taskResponse] = await Promise.all([
-          axios.get("http://localhost:3000/auth/get-users", {
-            headers: { Authorization: `Bearer ${token}` },
-          }),
-          axios.get("http://localhost:3000/task/get-tasks", {
-            headers: { Authorization: `Bearer ${token}` },
-          }),
+          axios.get(
+            "https://taskify-backend-ykux.onrender.com/auth/get-users",
+            {
+              headers: { Authorization: `Bearer ${token}` },
+            }
+          ),
+          axios.get(
+            "https://taskify-backend-ykux.onrender.com/task/get-tasks",
+            {
+              headers: { Authorization: `Bearer ${token}` },
+            }
+          ),
         ]);
 
         const userMap = {};
@@ -77,7 +83,7 @@ const TaskList = () => {
         return;
       }
       const response = await axios.post(
-        "http://localhost:3000/task/update-task-status",
+        "https://taskify-backend-ykux.onrender.com/task/update-task-status",
         { taskId, newStatus },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -103,7 +109,7 @@ const TaskList = () => {
     try {
       const token = localStorage.getItem("token");
       const response = await axios.delete(
-        `http://localhost:3000/task/delete-task/${taskId}`,
+        `https://taskify-backend-ykux.onrender.com/task/delete-task/${taskId}`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }

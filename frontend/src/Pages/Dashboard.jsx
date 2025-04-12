@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Table, Tag, Spin } from "antd";
-
+import { DeleteOutlined } from "@ant-design/icons";
 const Dashboard = () => {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -40,6 +40,23 @@ const Dashboard = () => {
     fetchUsers();
   }, []);
 
+  const handleDeleteUser = async (userId) => {
+    try {
+      const token = localStorage.getItem("token");
+      if (!token) return;
+
+      await axios.delete(`http://localhost:3000/auth/delete-user/${userId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      setUsers((prevUsers) => prevUsers.filter((user) => user.id !== userId));
+    } catch (error) {
+      console.error("Error deleting user:", error);
+    }
+  };
+
   const columns = [
     {
       title: "Sr No",
@@ -64,6 +81,16 @@ const Dashboard = () => {
         <Tag color={isInvited ? "green" : "volcano"}>
           {isInvited ? "Yes" : "No"}
         </Tag>
+      ),
+    },
+    {
+      title: "Actions",
+      key: "actions",
+      render: (text, record) => (
+        <DeleteOutlined
+          onClick={() => handleDeleteUser(record.key)}
+          style={{ color: "red", cursor: "pointer" }}
+        />
       ),
     },
   ];

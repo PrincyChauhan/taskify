@@ -2,8 +2,7 @@ const { User, sequelize } = require("../models");
 const bcrypt = require("bcrypt");
 const sendMail = require("../utils/mail");
 const jwt = require("jsonwebtoken");
-const { Sequelize, Op, where } = require("sequelize");
-const { QueryTypes } = require("sequelize");
+
 const adminSignup = async (req, res) => {
   const { username, email, password } = req.body;
   try {
@@ -147,9 +146,28 @@ const getAllUsers = async (req, res) => {
   }
 };
 
+const deleteUserByAdmin = async (req, res) => {
+  const userId = req.params.id;
+
+  try {
+    const deletedUser = await User.destroy({
+      where: { id: userId },
+    });
+
+    if (deletedUser === 0) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    return res.status(200).json({ message: "User deleted successfully" });
+  } catch (error) {
+    return res.status(500).json({ message: "Something went wrong", error });
+  }
+};
+
 module.exports = {
   adminSignup,
   createAndInviteUser,
   signin,
   getAllUsers,
+  deleteUserByAdmin,
 };

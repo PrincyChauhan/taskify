@@ -7,5 +7,6 @@ router.post("/admin/signup", authcontroller.adminSignup);
 router.post("/create-invite-user", isAdmin, authcontroller.createAndInviteUser);
 router.post("/signin", authcontroller.signin);
 router.get("/get-users", isAdmin, authcontroller.getAllUsers);
+router.delete("/delete-user/:id", isAdmin, authcontroller.deleteUserByAdmin);
 
 module.exports = router;

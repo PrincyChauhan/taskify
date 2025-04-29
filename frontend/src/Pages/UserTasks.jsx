@@ -69,6 +69,11 @@ const UserTasks = () => {
 
   const columns = [
     {
+      title: "Task ID",
+      dataIndex: "id",
+      key: "id",
+    },
+    {
       title: "Task Title",
       dataIndex: "title",
       key: "title",

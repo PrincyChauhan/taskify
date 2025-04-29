@@ -16,7 +16,7 @@ const Navbar = () => {
     <div className="bg-[#0C0950] p-4 w-full">
       <div className="flex justify-between items-center">
         <div className="text-white font-semibold text-lg">
-          {role === "admin" ? "Admin Dashboard" : "Assign Tasks"}
+          {role === "admin" ? "Admin Dashboard" : "User's Assign Tasks"}
         </div>
 
         <div className="relative">

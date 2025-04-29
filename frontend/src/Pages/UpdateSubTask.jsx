@@ -25,7 +25,7 @@ const UpdateSubTask = () => {
           return;
         }
         const response = await axios.get(
-          `https://taskify-backend-ykux.onrender.com/subtask/get-subtask/${subtaskId}`,
+          `http://localhost:3000/subtask/get-subtask/${subtaskId}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -52,7 +52,7 @@ const UpdateSubTask = () => {
     try {
       const token = localStorage.getItem("token");
       const response = await axios.post(
-        `https://taskify-backend-ykux.onrender.com/subtask/update-subtask`,
+        `http://localhost:3000/subtask/update-subtask`,
         {
           subtaskId,
           taskId,

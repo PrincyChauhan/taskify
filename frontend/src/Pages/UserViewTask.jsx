@@ -11,7 +11,7 @@ const UserViewTask = () => {
     const fetchTaskDetails = async () => {
       try {
         const response = await axios.get(
-          `https://taskify-backend-ykux.onrender.com/task/get-task/${taskId}`
+          `http://localhost:3000/task/get-task/${taskId}`
         );
         setTask(response.data.task);
         setSubtasks(response.data.task.subtasks);
@@ -26,7 +26,7 @@ const UserViewTask = () => {
   const handleStatusChange = async (subtaskId, currentStatus) => {
     try {
       const response = await axios.post(
-        "https://taskify-backend-ykux.onrender.com/subtask/update-subtask",
+        "http://localhost:3000/subtask/update-subtask",
         {
           subtaskId,
           taskId,

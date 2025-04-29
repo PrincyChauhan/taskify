@@ -22,14 +22,11 @@ const Dashboard = () => {
         return;
       }
 
-      const response = await axios.get(
-        "https://taskify-backend-ykux.onrender.com/auth/get-users",
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const response = await axios.get("http://localhost:3000/auth/get-users", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       const { users } = response.data;
       setUsers(users);
     } catch (error) {
@@ -48,14 +45,11 @@ const Dashboard = () => {
       const token = localStorage.getItem("token");
       if (!token) return;
 
-      await axios.delete(
-        `https://taskify-backend-ykux.onrender.com/auth/delete-user/${userId}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      await axios.delete(`http://localhost:3000/auth/delete-user/${userId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
       setUsers((prevUsers) => prevUsers.filter((user) => user.id !== userId));
     } catch (error) {

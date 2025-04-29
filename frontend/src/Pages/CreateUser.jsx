@@ -33,7 +33,7 @@ const CreateUser = () => {
     setLoading(true);
     try {
       const response = await axios.post(
-        "https://taskify-backend-ykux.onrender.com/auth/create-invite-user",
+        "http://localhost:3000/auth/create-invite-user",
         formData,
         {
           headers: {
@@ -50,7 +50,15 @@ const CreateUser = () => {
       }, 100);
     } catch (error) {
       console.error("Error while creating user:", error);
-      setError("Failed to create user.");
+      if (
+        error.response &&
+        error.response.data &&
+        error.response.data.message
+      ) {
+        setError(error.response.data.message); // <-- set backend error message!
+      } else {
+        setError("Failed to create user."); // fallback message
+      }
     } finally {
       setLoading(false);
     }

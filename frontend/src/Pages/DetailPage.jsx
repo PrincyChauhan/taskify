@@ -25,7 +25,7 @@ const DetailPage = () => {
       try {
         const token = localStorage.getItem("token");
         const response = await axios.get(
-          "https://taskify-backend-ykux.onrender.com/auth/get-users",
+          "http://localhost:3000/auth/get-users",
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -42,7 +42,7 @@ const DetailPage = () => {
     const fetchTaskCounts = async () => {
       try {
         const response = await axios.get(
-          "https://taskify-backend-ykux.onrender.com/task/task-counts"
+          "http://localhost:3000/task/task-counts"
         );
 
         setTaskCounts(response.data);
@@ -54,7 +54,7 @@ const DetailPage = () => {
     const fetchSubTaskCounts = async () => {
       try {
         const response = await axios.get(
-          "https://taskify-backend-ykux.onrender.com/subtask/subtask-count"
+          "http://localhost:3000/subtask/subtask-count"
         );
 
         setSubTaskCounts(response.data.totalSubTasks);

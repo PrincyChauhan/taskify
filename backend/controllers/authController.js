@@ -72,7 +72,6 @@ const signin = async (req, res) => {
 };
 
 const createAndInviteUser = async (req, res) => {
-  const t = await sequelize.transaction();
   const { username, email, password, role } = req.body;
   if (req.user.role !== "admin") {
     return res.status(403).json({ message: "Only admin can create users." });
@@ -80,24 +79,19 @@ const createAndInviteUser = async (req, res) => {
   try {
     const existingUser = await User.findOne({
       where: { email },
-      transaction: t,
     });
     if (existingUser) {
-      await t.rollback();
       return res.status(400).json({ message: "User already exists." });
     }
     const hashedPassword = await bcrypt.hash(password, 10);
-    const newUser = await User.create(
-      {
-        username,
-        email,
-        role,
-        password: hashedPassword,
-        isInvited: true,
-        invitedBy: req.user.userId,
-      },
-      { transaction: t }
-    );
+    const newUser = await User.create({
+      username,
+      email,
+      role,
+      password: hashedPassword,
+      isInvited: true,
+      invitedBy: req.user.userId,
+    });
 
     // Send invitation email
     const inviteMessage = `
@@ -112,7 +106,6 @@ const createAndInviteUser = async (req, res) => {
       `;
 
     await sendMail({ email }, "You're Invited to Our Platform!", inviteMessage);
-    await t.commit();
     res
       .status(201)
       .json({ message: "User created and invitation sent.", user: newUser });

@@ -24,13 +24,10 @@ const LoginPage = () => {
     setError("");
     setLoading(true);
     try {
-      const response = await axios.post(
-        "https://taskify-backend-ykux.onrender.com/auth/signin",
-        {
-          email: formData.email,
-          password: formData.password,
-        }
-      );
+      const response = await axios.post("http://localhost:3000/auth/signin", {
+        email: formData.email,
+        password: formData.password,
+      });
       if (response.data.success) {
         const { token, role, userId } = response.data;
         localStorage.setItem("token", token);

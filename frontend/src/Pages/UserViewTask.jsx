@@ -23,32 +23,6 @@ const UserViewTask = () => {
     fetchTaskDetails();
   }, [taskId]);
 
-  const handleStatusChange = async (subtaskId, currentStatus) => {
-    try {
-      const response = await axios.post(
-        "http://localhost:3000/subtask/update-subtask",
-        {
-          subtaskId,
-          taskId,
-          isCompleted: !currentStatus, // Toggle status
-        }
-      );
-
-      if (response.data.success) {
-        // Update UI after successful API call
-        setSubtasks((prevSubtasks) =>
-          prevSubtasks.map((subtask) =>
-            subtask.id === subtaskId
-              ? { ...subtask, isCompleted: !currentStatus }
-              : subtask
-          )
-        );
-      }
-    } catch (error) {
-      console.error("Error updating subtask:", error);
-    }
-  };
-
   if (!task) return <p>Loading task details...</p>;
 
   return (
@@ -138,17 +112,6 @@ const UserViewTask = () => {
                     Completed:
                   </label>
                   <span>{subtask.isCompleted?.toString()}</span>
-                  <span>
-                    <input
-                      type="checkbox"
-                      name="isCompleted"
-                      checked={subtask.isCompleted}
-                      className="w-5 h-5"
-                      onChange={() =>
-                        handleStatusChange(subtask.id, subtask.isCompleted)
-                      }
-                    ></input>
-                  </span>
                 </div>
                 <div>
                   <label className="text-md font-medium text-gray-700 mr-2">
